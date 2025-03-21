@@ -1,0 +1,56 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: white;
+  box-sizing: border-box;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  max-width: 80%;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+img {
+  width: 100%;
+  max-width: 400px;
+}
+
+.modal.landscape {
+  max-width: 90%;
+}
+
+.modal.portrait {
+  max-height: 90%;
+}
+
+.modalContent {
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: -32px;
+  right: -32px;
+  font-size: 20px;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 50%;
+  color: #000;
+
+  &:hover {
+  background: #ccc;
+  }
+}

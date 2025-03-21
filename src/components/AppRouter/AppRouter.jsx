@@ -1,0 +1,36 @@
+import { Routes, Route } from "react-router-dom"
+import { HomePage } from "../../pages/HomePage/HomePage"
+import { LoginPage } from "../../pages/LoginPage/LoginPage"
+import { NotFoundPage } from "../../pages/NotFoundPage/NotFoundPage"
+import { ProfilePage } from "../../pages/ProfilePage/ProfilePage"
+import { RequireAuth } from "../RequireAuth/RequireAuth"
+import { SongDetails } from "../SongDetails/SongDetails"
+import { ArtistPage } from "../../pages/ArtistPage/ArtistPage"
+import { SongCreate } from "../../pages/Admin/SongCreate"
+import { SongDelete } from "../../pages/Admin/SongDelete"
+import { SongUpdate } from "../../pages/Admin/SongUpdate"
+
+export const AppRouter = () => {
+    return (
+        <Routes>
+            <Route path="/login" element={<LoginPage />} />
+
+            <Route element={<RequireAuth />}>
+                <Route index element={<HomePage />} />
+                <Route path=":id" element={<SongDetails />} />
+                <Route path="/artist/:artist_id" element={<ArtistPage />} />
+
+                <Route path="/admin">
+                    <Route path="songs/create" element={<SongCreate />} />
+                    <Route path="songs/update/:id" element={<SongUpdate />} />
+                    <Route path="songs/delete/:id" element={<SongDelete />} />
+                </Route>
+                
+
+                <Route path="/profile" element={<ProfilePage />} />
+            </Route>
+
+            <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+    )
+}
