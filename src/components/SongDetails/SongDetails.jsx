@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
-import { SongDetailsContainer } from "./SongDetailsContainer.styled"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import { ContentWrapper } from "../ContentWrapper/ContentWrapper"
 import { useAuth } from "../../providers/AuthProvider"
 import { fetchApi } from "../../utils/api"
+import { SongDetailsStyled } from "./SongDetails.styled"
+import iconEdit from "../../assets/images/icon-edit.svg";
+import iconPrint from "../../assets/images/icon-print.svg";
+import iconHome from "../../assets/images/icon-home.svg";
 
 export const SongDetails = () => {
   const [song, setSong] = useState({})
@@ -29,13 +32,13 @@ export const SongDetails = () => {
   if (!song) return <p>Loading song details...</p>  
 
   const arrButtonPanel = [
-    { text: "Rediger", link: `/admin/songs/update/${id}` },
-    { text: "Udskriv", event: () => window.print() },
-    { text: "Slet", link: `/admin/songs/delete/${id}` },
+    { icon: iconEdit, text: "Rediger", link: `/admin/songs/update/${id}` },
+    { icon: iconPrint, text: 'Print', event: () => window.print() },
+    { icon: iconHome, text: 'Home', link: `/` }
   ]
 
   return (
-    <SongDetailsContainer>
+    <SongDetailsStyled>
       <ContentWrapper title={song.title} buttons={arrButtonPanel}>
         {song && song.artist && (
           <>
@@ -49,6 +52,6 @@ export const SongDetails = () => {
           </>
         )}
       </ContentWrapper>
-    </SongDetailsContainer>
+    </SongDetailsStyled>
   )
 }

@@ -1,11 +1,11 @@
-import { FooterContainer } from "./Footer.style"
+import { FooterStyled } from "./Footer.styled"
 
 export const Footer = ({ area }) => {
   return (
-    <FooterContainer $area={area}>
+    <FooterStyled $area={area}>
       <div>
-        <h2>HEINZ SONGBOOK</h2>
+        <h2>SingOnline</h2>
       </div>
-    </FooterContainer>
+    </FooterStyled>
   )
 }

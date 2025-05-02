@@ -8,11 +8,6 @@ export const ContentWrapperContainer = styled.div`
     margin-block-start: 0%;
   }
 
-  .button {
-    display: inline-block;
-    margin-left: 0.5rem;
-  }
-
   section {
     display: grid;
     grid-template-columns: 6fr 6fr;

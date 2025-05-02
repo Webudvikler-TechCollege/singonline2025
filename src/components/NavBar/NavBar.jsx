@@ -1,50 +1,47 @@
 import { NavLink } from "react-router-dom"
-import { NavBarContainer } from "./NavBar.style"
+import { NavBarStyled } from "./NavBar.styled"
 import { useState } from "react"
 import { useAuth } from "../../providers/AuthProvider"
+import { LoginInfo } from "../LoginInfo/LoginInfo"
 
 export const NavBar = ({ area }) => {
-  const [isActive, setActive] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const { loginData } = useAuth()
 
-  const arrNavItems = [
-    { name: "HOME", path: "/", order: 10 },
+  const navItems = [
+    { name: "HOME", path: "/" },
+    { name: "SETS", path: "/sets" },
+    { name: "PROFILE", path: "/profile" },
+    !loginData?.access_token && { name: "LOGIN", path: "/login" }
   ]
 
-  if(loginData?.access_token) {
-    arrNavItems.push({ name: "PROFILE", path: "/profile", order: 40 })
-  } else {
-    arrNavItems.push({ name: "LOGIN", path: "/login", order: 40 })
-  }
-
-  const handleToggle = () => {
-    setActive(!isActive)
-  }
-
   return (
-    <NavBarContainer $area={area} >
-      <div onClick={handleToggle}
-        className={`navMenu ${isActive ? "burgerMenuActive" : "burgerMenu"}`}
-      >
-        <div></div>
-        <div></div>
-        <div></div>
+    <NavBarStyled $area={area} $isOpen={isOpen}>
+      <div className="burger" onClick={() => setIsOpen(!isOpen)}>
+      {isOpen ? (
+          <span className="close">&times;</span>
+        ) : (
+          <>
+            <span></span>
+            <span></span>
+            <span></span>
+          </>
+        )}
       </div>
 
-      <ul>
-        {arrNavItems.map((item, index) => {
-          return (
-            <li key={index}>
-              <NavLink
-                to={item.path}
-                onClick={() => setActive(false)}
-              >
-                {item.name}
-              </NavLink>
-            </li>
-          )
-        })}
+      <ul className={`nav ${isOpen ? "open" : ""}`}>
+        {navItems.map((item, i) => (
+          <li key={i}>
+            <NavLink to={item.path} onClick={() => setIsOpen(false)}>
+              {item.name}
+            </NavLink>
+          </li>
+        ))}
+      {loginData?.access_token && (
+        <li><LoginInfo /></li>
+      )}
       </ul>
-    </NavBarContainer>
+
+    </NavBarStyled>
   )
 }

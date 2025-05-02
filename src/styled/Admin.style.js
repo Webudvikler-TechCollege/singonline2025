@@ -27,10 +27,15 @@ export const AdminTable = styled.table`
 
 export const AdminForm = styled.form`
 	div {
-		width: 50rem;
+		min-width: 20rem;
+		max-width: 50rem;
 		display: grid;
-		grid-template-columns: 2fr 10fr;
+		grid-template-columns: 1fr;
 		margin-bottom: 20px;
+
+		@media screen and (min-width: ${props => props.theme.grid.breakpoints.m}) {
+			grid-template-columns: 2fr 10fr;
+		}
 
 		input, select, textarea {
 			width: 100%;

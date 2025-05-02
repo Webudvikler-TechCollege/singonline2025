@@ -6,9 +6,12 @@ import { ProfilePage } from "../../pages/ProfilePage/ProfilePage"
 import { RequireAuth } from "../RequireAuth/RequireAuth"
 import { SongDetails } from "../SongDetails/SongDetails"
 import { ArtistPage } from "../../pages/ArtistPage/ArtistPage"
-import { SongCreate } from "../../pages/Admin/SongCreate"
-import { SongDelete } from "../../pages/Admin/SongDelete"
-import { SongUpdate } from "../../pages/Admin/SongUpdate"
+import { SongCreate } from "../../pages/Admin/Songs/SongCreate"
+import { SongDelete } from "../../pages/Admin/Songs/SongDelete"
+import { SongUpdate } from "../../pages/Admin/Songs/SongUpdate"
+import { SetCreate } from "../../pages/Admin/Sets/SetCreate"
+import { SetUpdate } from "../../pages/Admin/Sets/SetUpdate"
+import { SetListPage } from "../../pages/Admin/Sets/SetListPage"
 
 export const AppRouter = () => {
     return (
@@ -24,6 +27,9 @@ export const AppRouter = () => {
                     <Route path="songs/create" element={<SongCreate />} />
                     <Route path="songs/update/:id" element={<SongUpdate />} />
                     <Route path="songs/delete/:id" element={<SongDelete />} />
+                    <Route path="sets" element={<SetListPage />} />
+                    <Route path="sets/create" element={<SetCreate />} />
+                    <Route path="sets/update/:id" element={<SetUpdate />} />
                 </Route>
                 
 

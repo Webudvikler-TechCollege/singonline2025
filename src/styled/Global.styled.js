@@ -1,10 +1,11 @@
 import { createGlobalStyle } from "styled-components"
-import { Reset } from "./Mixins.style"
+import { Reset } from "./Mixins.styled"
+import { FormMixin } from "./Form.styled"
 
 const GlobalStyle = createGlobalStyle`
 	* {
 		box-sizing: border-box;
-		font-family: ${(props) => props.theme.fonts[1]};
+		font-family: ${(props) => props.theme.fonts[0]};
 		color: ${(props) => props.theme.colors.primary};
 	}
 
@@ -42,10 +43,10 @@ const GlobalStyle = createGlobalStyle`
 
 	a {
 		text-decoration: none;
-		color: ${(props) => props.theme.colors.secundary};
+		color: ${(props) => props.theme.colors.primary};
 		
 		&:hover {
-			color: ${(props) => props.theme.colors.quaternary};
+			color: ${(props) => props.theme.colors.secondary};
 		}
 	}
 
@@ -53,6 +54,8 @@ const GlobalStyle = createGlobalStyle`
 		font-size: 0.8rem;
 
 	}
+
+	${FormMixin}
 
 	@media print {
 		header, footer, nav, .back {

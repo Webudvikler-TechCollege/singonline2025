@@ -2,12 +2,17 @@ import styled from "styled-components"
 
 export const HeaderContainer = styled.header`
   grid-area: ${props => props.$area};
+  background-color: ${props => props.theme.colors.dark};
+  display: flex;
+  align-items: center;    /* Lodret centrering */
+  padding: 0rem 2rem;
+  min-height: 80px;
+
+  img {
+    width: 187px;
+  }
 
   a {
-    color: ${props => props.theme.colors.primary};
-    font-family: ${props => props.theme.fonts[0]};
-    font-size: ${props => props.theme.fontsizes.xl};
     text-decoration: none;
-    font-weight: bold;
   }
 `

@@ -1,13 +1,11 @@
 export const theme = {
   colors: {
-    primary: "#637A9F",
-    secondary: "#FFF3CF",
-    tertiary: "#C9D7DD",
-    quaternary: "#E8C872",
+    primary: "#333",
+    secondary: "#34D388",
     dark: "#000",
     light: "#fff",
   },
-  fonts: ["Titillium Web", "Open Sans", "monospace"],
+  fonts: ["Open Sans", "monospace"],
   fontsizes: {
     xs: "0.8rem",
     s: "0.9rem",
@@ -43,7 +41,7 @@ export const theme = {
         rows: "1fr 10fr 1fr",
         columns: "5fr 1fr",
         areas: `
-					"header header header header navbar navbar"
+					"header header header header header navbar"
 					"main main main main main main"
 					"footer footer footer footer footer footer"
 					`
@@ -55,8 +53,8 @@ export const theme = {
         rows: "1fr 10fr 1fr",
         columns: "1fr 5fr",
         areas: `
-					"header navbar navbar navbar navbar navbar"
-					"main main main main main main"
+					"header header header header header header" 
+					"navbar main main main main main"
 					"footer footer footer footer footer footer"
 					`
       }
