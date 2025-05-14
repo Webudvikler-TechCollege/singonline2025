@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://singonline-api.onrender.com";
 
 // Hent tokens fra sessionStorage
 const getAccessToken = () => sessionStorage.getItem("access_token");
