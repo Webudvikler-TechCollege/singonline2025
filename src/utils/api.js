@@ -1,13 +1,13 @@
 const BASE_URL = "https://singonline-api.onrender.com";
 
-// Hent tokens fra sessionStorage
-const getAccessToken = () => sessionStorage.getItem("access_token");
-const getRefreshToken = () => sessionStorage.getItem("refresh_token");
+// Hent tokens fra localStorage
+const getAccessToken = () => localStorage.getItem("access_token");
+const getRefreshToken = () => localStorage.getItem("refresh_token");
 
-// Gem nye tokens i sessionStorage
+// Gem nye tokens i localStorage
 const saveTokens = (access, refresh) => {
-    if (access) sessionStorage.setItem("access_token", access);
-    if (refresh) sessionStorage.setItem("refresh_token", refresh);
+    if (access) localStorage.setItem("access_token", access);
+    if (refresh) localStorage.setItem("refresh_token", refresh);
 };
 
 // Hovedfunktion til at lave API-kald
@@ -70,8 +70,8 @@ const refreshAccessToken = async () => {
     // Logger ud hvis refresh_token ikke eksisterer
     if (!refreshToken) {
         console.log("No refresh token available, logging out...");
-        sessionStorage.removeItem("access_token");
-        sessionStorage.removeItem("refresh_token");
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
         window.location.href = "/login"; // Redirect til login
         return null;
     }
@@ -87,8 +87,8 @@ const refreshAccessToken = async () => {
         // Send til login hvis response fejler
         if (!response.ok) {
             console.error("Failed to refresh token, logging out...");
-            sessionStorage.removeItem("access_token");
-            sessionStorage.removeItem("refresh_token");
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("refresh_token");
             window.location.href = "/login"; // Redirect til login
             return null;
         }
@@ -105,8 +105,8 @@ const refreshAccessToken = async () => {
         }
     } catch (error) {
         console.error("Error refreshing token:", error);
-        sessionStorage.removeItem("access_token");
-        sessionStorage.removeItem("refresh_token");
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
         window.location.href = "/login"; // Redirect til login
         return null;
     }
