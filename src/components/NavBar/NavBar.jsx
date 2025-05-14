@@ -10,8 +10,8 @@ export const NavBar = ({ area }) => {
 
   const navItems = [
     { name: "HOME", path: "/" },
-    { name: "SETS", path: "/sets" },
-    { name: "PROFILE", path: "/profile" },
+    /* { name: "SETS", path: "/sets" },
+    { name: "PROFILE", path: "/profile" }, */
     !loginData?.access_token && { name: "LOGIN", path: "/login" }
   ]
 
