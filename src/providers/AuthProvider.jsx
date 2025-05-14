@@ -8,10 +8,10 @@ export const AuthProvider = ({ children }) => {
   const [loginData, setLoginData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Hent login-data fra sessionStorage ved start
+  // Hent login-data fra localStorage ved start
   useEffect(() => {
-    const accessToken = sessionStorage.getItem("access_token");
-    const userData = sessionStorage.getItem("user_data");
+    const accessToken = localStorage.getItem("access_token");
+    const userData = localStorage.getItem("user_data");
 
     if (accessToken && userData) {
       try {
@@ -32,11 +32,11 @@ export const AuthProvider = ({ children }) => {
   const login = (data) => {
     setLoginData(data);
 
-    // Gem kun relevante data i sessionStorage
-    sessionStorage.setItem("access_token", data.access_token);
-    sessionStorage.setItem("refresh_token", data.refresh_token || ""); // Undgå null fejl
+    // Gem kun relevante data i localStorage
+    localStorage.setItem("access_token", data.access_token);
+    localStorage.setItem("refresh_token", data.refresh_token || ""); // Undgå null fejl
     if (data.user) {
-      sessionStorage.setItem("user_data", JSON.stringify(data.user));
+      localStorage.setItem("user_data", JSON.stringify(data.user));
     }
 
     return true;
@@ -45,9 +45,9 @@ export const AuthProvider = ({ children }) => {
   // Logout-funktion
   const logout = () => {
     setLoginData(null);
-    sessionStorage.removeItem("access_token");
-    sessionStorage.removeItem("refresh_token");
-    sessionStorage.removeItem("user_data");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("user_data");
     return true;
   };
 
