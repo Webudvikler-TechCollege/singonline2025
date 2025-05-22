@@ -4,11 +4,13 @@ import { SongListItem } from "../SongListItem/SongListItem"
 import { FlushArray } from "../../utils/index"
 import { useParams } from "react-router-dom"
 import { useSongs } from "../../providers/SongProvider"
+import { Loader } from "../Loader/Loader"
 
 export const SongList = ({ type, keyword, limit = 10 }) => {
-  const [ headline, setHeadline ] = useState("")
+  const [headline, setHeadline] = useState("")
   const { artist_id } = useParams()
   const { songs } = useSongs()
+  const [loading, setLoading] = useState(true)
 
   if (type === 'search' && !keyword) {
     type = 'random'
@@ -45,7 +47,17 @@ export const SongList = ({ type, keyword, limit = 10 }) => {
   }, [songs, keyword, type])
 
   useEffect(() => {
-    switch(type) {
+    if(songs && songs.length > 0) {
+      const timer = setTimeout(() => {
+        setLoading(false)
+      }, 1000)
+      return () => clearTimeout(timer)
+
+    } else {
+      setLoading(true)
+    }
+
+    switch (type) {
       case "random":
         setHeadline('10 random');
         break;
@@ -63,20 +75,27 @@ export const SongList = ({ type, keyword, limit = 10 }) => {
   return (
     <>
       <h3>{headline}</h3>
-      <SongListStyled>
-        {data &&
-          data.map((song) => {
-            return (
-              <SongListItem
-                key={song.id}
-                id={song.id}
-                title={song.title}
-                artist={song.artist.name}
-                artist_id={song.artist.id}
-              />
-            )
-          })}
-      </SongListStyled>
+      {loading ? (
+        <Loader />
+      ) : (
+        <SongListStyled>
+          {data &&
+            data.map((song) => {
+              return (
+                <SongListItem
+                  key={song.id}
+                  id={song.id}
+                  title={song.title}
+                  artist={song.artist.name}
+                  artist_id={song.artist.id}
+                />
+              )
+            })}
+        </SongListStyled >
+
+      )
+
+      }
     </>
   )
 }

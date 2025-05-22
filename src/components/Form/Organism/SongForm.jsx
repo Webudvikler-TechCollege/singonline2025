@@ -5,12 +5,17 @@ import { useArtists } from "../../../providers/ArtistProvider";
 import { useAuth } from "../../../providers/AuthProvider";
 import { fetchApi } from "../../../utils/api";
 import { useSongs } from "../../../providers/SongProvider";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import iconPlus from "../../../assets/images/icon-plus.svg";
+import { useState } from "react";
+import { IconButton } from "../../IconButton/IconButton";
 
 export const SongForm = ({ defaultValues = {}, mode = "create" }) => {
     const { artists } = useArtists()
     const { loginData } = useAuth()
     const { setSongs } = useSongs()
+    const [showModal, setShowModal] = useState(false);
+    const [newArtistName, setNewArtistName] = useState("");
     const navigate = useNavigate()
 
     const {
@@ -63,15 +68,39 @@ export const SongForm = ({ defaultValues = {}, mode = "create" }) => {
             />
 
             {artists.length > 0 && (
-                <FormField
-                    as="select"
-                    label="Artist"
-                    name="artist_id"
-                    options={artists.map((a) => ({ value: a.id, label: a.name }))}
-                    rules={{ required: "Artist is required" }}
-                    error={errors?.artist_id?.message}
-                    register={register}
-                />
+                <>
+                    <FormField
+                        as="select"
+                        label="Artist"
+                        name="artist_id"
+                        options={artists.map((a) => ({ value: a.id, label: a.name }))}
+                        rules={{ required: "Artist is required" }}
+                        error={errors?.artist_id?.message}
+                        register={register}
+                    />
+                    <div>
+                        <label></label>
+                        <Link type="button" className="button" onClick={async () => {
+                            const name = prompt("Indtast navn på ny artist:");
+
+                            if (!name) return;
+
+                            try {
+                                const response = await fetchApi("/artists", "POST", { name }, loginData.access_token);
+
+                                if (response?.response) {
+                                    alert(`Ny artist tilføjet: ${response.response.name}`);
+                                }
+                            } catch (err) {
+                                console.error("Fejl ved oprettelse af artist:", err);
+                                alert("Noget gik galt – prøv igen.");
+                            }
+                        }}>
+                            <IconButton icon={iconPlus} />
+                        </Link>
+                    </div>
+                </>
+
             )}
 
             <div className="form-actions">

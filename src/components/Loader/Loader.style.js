@@ -1,26 +1,36 @@
-import styled from 'styled-components'
+import styled, { keyframes } from "styled-components"
+
+const spin = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`
 
 export const LoaderStyled = styled.div`
-    .loader-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-    }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8); /* semi-transparent bg */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 
-    .spinner {
-        border: 4px solid rgba(0, 0, 0, 0.1);
-        border-left-color: #000;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-    }
+  .spinner {
+    width: 64px;
+    height: 64px;
+    border: 8px solid #ccc;
+    border-top-color: #007bff;
+    border-radius: 50%;
+    animation: ${spin} 1s linear infinite;
+    margin-bottom: 1rem;
+  }
 
-    @keyframes spin {
-        to {
-            transform: rotate(360deg);
-        }
-    }
+  p {
+    font-size: 1.2rem;
+    color: #333;
+  }
 `
